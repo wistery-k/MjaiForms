@@ -83,6 +83,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="DynamicJson.dll" />
     <Content Include="paiga\m0.png" />
     <Content Include="paiga\m1.png" />
     <Content Include="paiga\m2.png" />
