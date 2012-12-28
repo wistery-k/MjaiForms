@@ -114,7 +114,7 @@ namespace MjaiForms
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            hostTextBox.Text = "192.168.11.8";
+            hostTextBox.Text = "133.242.133.31";
             portTextBox.Text = "11600";
             roomTextBox.Text = "default";
             nameTextBox.Text = "wistery_k";
@@ -585,8 +585,14 @@ namespace MjaiForms
                                         response = Protocol.hora(id, actor, pai);
                                     else if (alt == Alternatives.Pon)
                                     {
-                                        response = Protocol.pon(id, actor, pai, Enumerable.Repeat(pai, 2).ToList());
-                                        for (int i = 0; i < 2; i++) tehais[id].Remove(pai);
+                                        List<int> consumed = new List<int>();
+                                        for (int i = 0; i < 2; i++)
+                                        {
+                                            int ix = tehais[id].FindIndex(p => comparePai(p, pai) == 0);
+                                            consumed.Add(tehais[id][ix]);
+                                            tehais[id].RemoveAt(ix);
+                                        }
+                                        response = Protocol.pon(id, actor, pai, consumed);
                                     }
                                     else if (alt == Alternatives.Kan)
                                     {
