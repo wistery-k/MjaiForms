@@ -252,7 +252,7 @@ namespace MjaiForms
                             g.DrawImage(im, po);
                             if (i == id && !av) 
                                 g.FillRectangle(new SolidBrush(Color.FromArgb(0x80, Color.Black)), new Rectangle(po, new Size(PAI_WIDTH, PAI_HEIGHT)));
-                            if (i == id && selecteds != null && selecteds.Any(_ => _ == j))
+                            if (i == id && selecteds != null && selecteds.Contains(j))
                                 g.FillRectangle(new SolidBrush(Color.FromArgb(0x80, Color.OrangeRed)), new Rectangle(po, new Size(PAI_WIDTH, PAI_HEIGHT)));
                         }
                     }
@@ -280,7 +280,7 @@ namespace MjaiForms
 
                             g.DrawImage(im, po);
 
-                            if (kawaNakares != null && kawaNakares[i].Any(_ => _ == j))
+                            if (kawaNakares != null && kawaNakares[i].Contains(j))
                                 g.FillRectangle(new SolidBrush(Color.FromArgb(0x80, Color.Black)), rect);
 
                         }
@@ -415,11 +415,11 @@ namespace MjaiForms
                                     availablePai = Enumerable.Repeat(true, 14).ToList();
                                 }
 
-                                if (alternatives.Any(_ => _ == Alternatives.Tsumo) && autoHora.Checked)
+                                if (alternatives.Contains(Alternatives.Tsumo) && autoHora.Checked)
                                 {
                                     response = Protocol.hora(id, id, pai);
                                 }
-                                else if (reaches[id] != -1)
+                                else if (reaches[id] != -1 && !alternatives.Contains(Alternatives.Tsumo))
                                 {
                                     response = Protocol.dahai(id, pai, true);
                                     tehais[id].RemoveAt(tehais[id].Count - 1);
@@ -553,7 +553,7 @@ namespace MjaiForms
                                     alternatives.Add(Alternatives.Kan);
                                 }
                                 
-                                if (alternatives.Any(_ => _ == Alternatives.Ron && autoHora.Checked))
+                                if (alternatives.Contains(Alternatives.Ron) && autoHora.Checked)
                                 {
                                     response = response = Protocol.hora(id, actor, pai);
                                 }
